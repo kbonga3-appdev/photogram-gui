@@ -1,4 +1,4 @@
-asdfasd
+
 <h1>List of users</h1>
 
 <form action="/insert_user_record">
@@ -37,10 +37,10 @@ asdfasd
     </td>
 
     <td>
-    Show details
-    <!--
-      <a href="/users/anisa">Show details</a>
-      -->
+    
+    
+      <a href="/users/<%= user.username%>">Show details</a>
+      
     </td>
   </tr>
 <% end %>
