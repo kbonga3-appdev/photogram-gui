@@ -22,7 +22,7 @@ class PhotosController < ApplicationController
           matching_photos = Photo.where({ :id => the_id })
           the_photo = matching_photos.at(0)
           the_photo.destroy
-           redirect_to("/photos")
+          redirect_to("/photos")
           #  render({ :template => "photo_templates/deletephoto.html.erb" })  
      end
 
@@ -44,5 +44,29 @@ class PhotosController < ApplicationController
           # render({ :template => "photo_templates/addphotos.html.erb" })
 
           redirect_to("/photos/" + new_photo.id.to_s )
+     end
+
+     def updatephoto
+
+          # Parameters: {"input_image"=>"https://www.dreamstime.com/photos-images/bikini-girl.html", "input_caption"=>"https://www.dreamstime.com/photos-images/bikini-girl.html", "update_photo_id"=>"952"}
+       the_id = params.fetch("update_photo_id")
+
+       matching_photos = Photo.where({ :id => the_id})
+      
+       the_photo = matching_photos.at(0)
+
+       image_input = params.fetch("input_image")
+       caption_input = params.fetch("input_caption")
+     #   owner_input = params.fetch("val_query_ownerid")
+
+
+     the_photo.image = image_input
+     the_photo.caption = caption_input
+
+     the_photo.save
+
+     redirect_to("/photos/" + the_photo.id.to_s)
+    # render({ :template => "photo_templates/update.html.erb" })
+
      end
 end
