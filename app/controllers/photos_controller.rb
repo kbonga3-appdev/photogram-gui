@@ -49,7 +49,10 @@ class PhotosController < ApplicationController
      def updatephoto
 
           # Parameters: {"input_image"=>"https://www.dreamstime.com/photos-images/bikini-girl.html", "input_caption"=>"https://www.dreamstime.com/photos-images/bikini-girl.html", "update_photo_id"=>"952"}
-       the_id = params.fetch("update_photo_id")
+
+        the_id = params.fetch("update_photo_id")
+                        
+       
 
        matching_photos = Photo.where({ :id => the_id})
       
@@ -67,6 +70,29 @@ class PhotosController < ApplicationController
 
      redirect_to("/photos/" + the_photo.id.to_s)
     # render({ :template => "photo_templates/update.html.erb" })
+
+     end
+
+
+     def insert_comment
+
+     photoid = params.fetch("input_photo_id")
+
+     commentupdate = Comment.new
+     
+     comments = params.fetch("input_body")
+     authorid = params.fetch("input_author_id")
+     
+     commentupdate.photo_id = photoid
+     commentupdate.body = comments
+     commentupdate.author_id = authorid
+     commentupdate.save
+
+
+
+
+         
+     redirect_to("/photos/" + photoid.to_s)
 
      end
 end
